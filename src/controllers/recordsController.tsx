@@ -29,7 +29,7 @@ export function index(req: any, res: any) {
           <button type="submit">Start Download</button>
         </form>
         <div id="downloads">
-          {Array.from(processes.entries()).map(([key, values]) =>
+          {Array.from(processes.entries()).map(([_, values]) =>
             progress(values),
           )}
         </div>
