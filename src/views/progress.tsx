@@ -7,6 +7,7 @@ export default function progress(id: string, parameters: process_parameters) {
       hx-get={`/records/progress/${id}`}
       hx-target={`#process-${id}`}
       hx-trigger="every 2s"
+      hx-swap="outerHTML"
     >
       {parameters["name"]} - progress:{" "}
       {Math.floor((parameters["downloaded"] / parameters["length"]) * 100)}%
