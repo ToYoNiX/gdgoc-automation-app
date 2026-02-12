@@ -5,37 +5,23 @@ import { createWriteStream, mkdirSync } from "fs";
 import { processes } from "../app.js";
 import layout from "../views/layout.js";
 import progress from "../views/progress.js";
+import index from "../views/index.js";
 import type { process_parameters } from "../common/types.js";
 import { logger } from "../app.js";
 
 export function getProgress(req: any, res: any) {
-  const key = req.body.key;
+  const key = req.params.id;
 
-  return progress(key);
+  const parameters = processes.get(key);
+  if (!parameters) {
+    return res.send("");
+  }
+
+  return res.send(progress(key, parameters));
 }
 
-export function index(req: any, res: any) {
-  res.send(
-    layout(
-      "Records Dashboard",
-      <div id="focus">
-        <form
-          hx-post="/records/download"
-          hx-target="#focus"
-          hx-swap="innerHTML"
-        >
-          <input type="text" name="name" placeholder="name" id="name" />
-          <input type="text" name="url" placeholder="url" id="url" />
-          <button type="submit">Start Download</button>
-        </form>
-        <div id="downloads">
-          {Array.from(processes.entries()).map(([_, values]) =>
-            progress(values),
-          )}
-        </div>
-      </div>,
-    ),
-  );
+export function getIndex(req: any, res: any) {
+  return res.send(layout("Records Dashboard", index()));
 }
 
 export async function downloadVideo(req: any, res: any) {
