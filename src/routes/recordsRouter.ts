@@ -4,7 +4,7 @@ import { getIndex, getProgress, downloadVideo } from "../controllers/recordsCont
 const recordRouter = express.Router();
 
 recordRouter.get("/", getIndex);
-recordRouter.get("/progress/:id", getProgress);
+recordRouter.get("/progress", getProgress);
 recordRouter.post("/download", downloadVideo);
 
 export default recordRouter;

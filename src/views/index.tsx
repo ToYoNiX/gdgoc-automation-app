@@ -1,5 +1,4 @@
 import progress from "./progress.js";
-import { processes } from "../store/processes.js";
 
 export default function index(): JSX.Element {
   return (
@@ -9,11 +8,7 @@ export default function index(): JSX.Element {
         <input type="text" name="url" placeholder="URL" id="url" required />
         <button type="submit">Start Download</button>
       </form>
-      <div id="downloads">
-        {Array.from(processes.entries()).map(([id, values]) =>
-          progress(id, values)
-        )}
-      </div>
+      {progress()}
     </div>
   );
 }

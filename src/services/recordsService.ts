@@ -6,10 +6,6 @@ import { logger } from "../app.js";
 import type { process_parameters } from "../common/types.js";
 import { processes } from "../store/processes.js";
 
-export function downloadProgress(uuid: string): process_parameters | "Not found" {
-  return processes.get(uuid) ?? "Not found";
-}
-
 export async function download(name: string, url: string): Promise<void> {
   mkdirSync("downloads", { recursive: true });
 

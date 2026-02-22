@@ -3,22 +3,10 @@ import layout from "../views/layout.js";
 import progress from "../views/progress.js";
 import index from "../views/index.js";
 import { logger } from "../app.js";
-import { download, downloadProgress } from "../services/recordsService.js";
+import { download } from "../services/recordsService.js";
 
 export function getProgress(req: Request, res: Response) {
-  const key = req.params.id as string;
-
-  if (!key) {
-    return res.status(400).send("Missing progress ID");
-  }
-
-  const result = downloadProgress(key);
-
-  if (result === "Not found") {
-    return res.status(404).send("No download found for that ID");
-  }
-
-  return res.send(progress(key, result));
+  return res.send(progress());
 }
 
 export function getIndex(req: Request, res: Response) {
