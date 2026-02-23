@@ -16,7 +16,7 @@ app.use(session({
   secret: `${process.env.APP_USERNAME}${process.env.APP_PASSWORD}`,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false },
+  cookie: { secure: process.env.HTTPS === "true" },
 }));
 
 // public routes
